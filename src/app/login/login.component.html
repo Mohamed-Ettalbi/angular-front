@@ -1,0 +1,28 @@
+<p>login works!</p>
+<h2>Login</h2>
+
+<form (ngSubmit)="login()">
+  <div>
+    <label for="username">Username/Email</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="credential.username"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="credential.password"
+      required
+    />
+  </div>
+
+  <button type="submit">Login</button>
+</form>
