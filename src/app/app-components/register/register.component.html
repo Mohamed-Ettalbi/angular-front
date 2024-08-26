@@ -1,0 +1,70 @@
+<h2>Register</h2>
+
+<form (ngSubmit)="register()">
+  <div>
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="user.firstName"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="user.lastName"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="phone">Phone</label>
+    <input
+      type="text"
+      id="phone"
+      name="phone"
+      [(ngModel)]="user.phone"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="role">Role</label>
+    <select id="role"
+     name="role" 
+     [(ngModel)]="user.role" 
+     required >
+         @for (role of roles; track role) { <option value="role.value">{{ role.label }}</option>  }
+  </select>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
