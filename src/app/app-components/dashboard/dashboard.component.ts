@@ -15,7 +15,7 @@ export class DashboardComponent  {
   constructor(private ticketService: TicketService) {}
   ticketDTO: TicketDTO[] = [];
 
-  displayedColumns: string[] = ['ticketId', 'title', 'description', 'status'];
+  displayedColumns: string[] = ['ticketId', 'title', 'ticketCategoryName','priority', 'status'];
   dataSource = this.ticketDTO;
 
 
