@@ -1,29 +1,40 @@
-<p>login works!</p>
 <h2>Login</h2>
 
-<form (ngSubmit)="login()">
+<form [formGroup]="loginForm" (ngSubmit)="login()" >
+  <!-- Email Field -->
   <div>
-    <label for="username">Username/Email</label>
+    <label for="Email">Email</label>
     <input
-      type="text"
-      id="username"
-      name="username"
-      [(ngModel)]="credential.username"
-      required
+      type="email"
+      id="Email"
+      formControlName="username"
     />
+    <!-- Email Validation Messages -->
+    <div *ngIf="loginForm.get('username')?.invalid &&loginForm.get('username')?.touched" class="error">
+      <small *ngIf="loginForm.get('username')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="loginForm.get('username')?.errors?.['email']">Invalid email format.</small>
+    </div>
   </div>
 
+  <!-- Password Field -->
   <div>
     <label for="password">Password</label>
     <input
       type="password"
       id="password"
-      name="password"
-      [(ngModel)]="credential.password"
-      required
+   formControlName ="password"
     />
+    <!-- Password Validation Messages -->
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+      <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+      <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+      <small *ngIf="loginForm.get('password')?.errors?.['maxlength']">Password cannot exceed 64 characters.</small>
+    </div>
   </div>
 
-  <button type="submit">Login</button>
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  <p>  </p>
   <a href="/register">Don't have an account? Register here</a>
+
 </form>

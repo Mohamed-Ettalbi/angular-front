@@ -1,15 +1,19 @@
 <h2>Register</h2>
 
-<form (ngSubmit)="register()">
+<form [formGroup]="registerForm" (ngSubmit)="register()">
   <div>
     <label for="firstName">First Name</label>
     <input
       type="text"
       id="firstName"
-      name="firstName"
-      [(ngModel)]="user.firstName"
-      required
+      formControlName="firstName"
     />
+    <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="error">
+
+      <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</small>
+      <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 2 characters.</small>
+      <small *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">First Name cannot exceed 50 characters.</small>
+    </div>
   </div>
 
   <div>
@@ -17,10 +21,13 @@
     <input
       type="text"
       id="lastName"
-      name="lastName"
-      [(ngModel)]="user.lastName"
-      required
+      formControlName="lastName"
     />
+    <div *ngIf="registerForm.get('lastName')?.invalid &&registerForm.get('lastName')?.touched" class="error">
+      <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</small>
+      <small *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2 characters.</small>
+      <small *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot exceed 50 characters.</small>
+    </div>
   </div>
 
   <div>
@@ -28,10 +35,12 @@
     <input
       type="email"
       id="email"
-      name="email"
-      [(ngModel)]="user.email"
-      required
+      formControlName="email"
     />
+    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
+      <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+    </div>
   </div>
 
   <div>
@@ -39,10 +48,12 @@
     <input
       type="text"
       id="phone"
-      name="phone"
-      [(ngModel)]="user.phone"
-      required
+      formControlName="phone"
     />
+    <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error">
+      <small *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+      <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
+    </div>
   </div>
 
   <div>
@@ -50,21 +61,29 @@
     <input
       type="password"
       id="password"
-      name="password"
-      [(ngModel)]="user.password"
-      required
+      formControlName="password"
     />
+    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+      <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password cannot exceed 64 characters.</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['password']">
+        Password must contain at least one number, one lowercase letter,one UpperCaseletter, and one special character.</small>
+    </div>
   </div>
 
   <div>
     <label for="role">Role</label>
-    <select id="role"
-     name="role" 
-     [(ngModel)]="user.role" 
-     required >
-         @for (role of roles; track role) { <option value="role.value">{{ role.label }}</option>  }
-  </select>
+    <select
+      id="role"
+      formControlName="role"
+    >
+      <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+    </select>
+    <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="error">
+      <small *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</small>
+    </div>
   </div>
-
-  <button type="submit">Register</button>
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  <a href="/login"> Already have an account? Login here.</a>
 </form>

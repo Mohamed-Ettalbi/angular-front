@@ -1,66 +1,101 @@
 /* Container styling */
 form {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #e8e8ff;
-    border-radius: 8px;
-  }
-  
-  /* Input fields styling */
-  form div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #000000;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
-  }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  select:focus {
-    border-color: #66afe9;
-    outline: none;
-    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
-  }
-  
-  /* Button styling */
-  button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /*  Form title styling */
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px;
+  background-color: #f5f7fa;  /* Lighter background for better contrast */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Input fields styling */
+form div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #2c3e50; /* Darker color for better readability */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bdc3c7; /* Softer border color */
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: all 0.3s ease; /* Smooth transition on focus */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.4); /* Softer glow effect */
+}
+
+/* Button styling */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #2980b9; 
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1c598a; /* Darker hover effect */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+button[type="submit"]:active {
+  background-color: #1c598a; /* Keep the color consistent on click */
+  transform: translateY(0); /* No lift on click */
+}
+
+/* Form title styling */
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 24px; /* Larger font size for the title */
+  font-weight: 600; /* Slightly bolder font */
+}
+
+/* Additional styling */
+form div.error {
+  color: #e74c3c; /* Red color for error messages */
+  margin-top: 5px;
+}
+
+input[type="text"].ng-invalid.ng-touched,
+input[type="email"].ng-invalid.ng-touched,
+input[type="password"].ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #e74c3c; /* Red border for invalid fields */
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+}
+a {
+  color: #3498db;
+  text-decoration: none;
+  margin-top: 7px;
+  display: inline-block;
+}
+

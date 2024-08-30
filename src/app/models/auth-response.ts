@@ -1,5 +1,5 @@
-import { UserDTO } from "../dtos/UserDTO";
-import { TechnicianDTO } from "../dtos/TechnicianDTO";
+import { UserDTO } from "./dtos/UserDTO";
+import { TechnicianDTO } from "./dtos/TechnicianDTO";
 
 export interface AuthResponse {
     token: string;
