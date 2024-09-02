@@ -3,10 +3,11 @@ import { TicketService } from '../../Services/ticket.service';
 import { TicketDTO } from '../../models/dtos/TicketDTO';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,JsonPipe , MatTableModule],
+  imports: [CommonModule,JsonPipe , MatTableModule , LoginComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   encapsulation: ViewEncapsulation.None,

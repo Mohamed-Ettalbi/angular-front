@@ -29,30 +29,21 @@ this.loginForm = this.fb.group({
   password: ['' , [Validators.required, Validators.minLength(8), Validators.maxLength(64)]]
   });
   }
+ 
 
-login(){
-  if (this.loginForm.valid)
-    {
+  login() {
+    if (this.loginForm.valid) {
       this.credential = this.loginForm.value;
-        this.authService.login(this.credential).subscribe(
-
-          (response)=>{
-
-            console.log ("Login susccessfull", response)
-            localStorage.setItem('token', response.token)
-            this.router.navigate(['/dashboard']);
-          },
-          (error: HttpErrorResponse) => {
-
-            console.error('Login failed', error);
-            alert('Login failed. Please check your credentials.');
-          }
-
-        )
-
-
-      }
+      this.authService.login(this.credential).subscribe({
+        next: (response) => {
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Login failed', error);
+          alert('Login failed. Please check your credentials.');
+        }
+      });
+    }
+  }
+  
 }
-}
-
-

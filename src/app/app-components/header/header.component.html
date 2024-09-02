@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <span>EasyTicket</span>
+    <div class="spacer"></div>
+    <button mat-button [routerLink]="'/dashboard'">Dashboard</button>
+    <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/login'">Login</button>
+    <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+  </mat-toolbar>
+  
