@@ -4,5 +4,6 @@
     <button mat-button [routerLink]="'/dashboard'">Dashboard</button>
     <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/login'">Login</button>
     <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+    <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/register'">Register</button>
   </mat-toolbar>
   
