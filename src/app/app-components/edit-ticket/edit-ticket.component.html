@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Update Ticket : {{ticketId}}</mat-card-title>
+      </mat-card-header>
+      <hr class="header-divider">
+    <form [formGroup]="ticketForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+  
+      <div class="category-priority-container">
+        <mat-form-field class="priority-field" appearance="fill">
+          <mat-label>Priority</mat-label>
+          <select matNativeControl formControlName="priority">
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
+        </mat-form-field>
+  
+        <mat-form-field class="category-field" appearance="fill">
+          <mat-label>Category</mat-label>
+          <select matNativeControl formControlName="ticketCategory">
+            <option *ngFor="let category of ticketCategorynames" [value]="category.value">{{ category.name }}</option>
+
+            <!-- <option value="1">Category 1</option>
+            <option value="2">Category 2</option>
+            <option value="3">Category 3</option> -->
+            
+          </select>
+        </mat-form-field>
+      </div>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Update Ticket</button>
+    </form>
+  </mat-card>
+  

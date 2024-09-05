@@ -1,6 +1,6 @@
 /* Container styling */
 form {
-  max-width: 400px;
+  max-width: 45%;
   margin: 60px auto;
   padding: 25px;
   background-color: #f5f7fa;  /* Lighter background for better contrast */
@@ -10,7 +10,7 @@ form {
 
 /* Input fields styling */
 form div {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 label {
@@ -69,7 +69,7 @@ button[type="submit"]:active {
 h2 {
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   font-size: 24px; /* Larger font size for the title */
   font-weight: 600; /* Slightly bolder font */
 }
@@ -99,3 +99,27 @@ a {
   display: inline-block;
 }
 
+
+label::after {
+  content: " *"; /* Add space before the asterisk */
+  color: rgb(231, 103, 103);    /* Set the color of the asterisk to red */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.form-group:last-child {
+  margin-right: 0px;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}

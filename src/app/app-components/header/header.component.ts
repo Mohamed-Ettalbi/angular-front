@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../Services/auth-service.service';
 import { CommonModule } from '@angular/common';
+
+
 
 
 @Component({
@@ -22,16 +24,20 @@ export class HeaderComponent {
   logout() {
     this.authService.logout();
   }
-
+username = '';
   isLoggedIn() {
-    
     if(this.authService.currentUserValue){
-   
+      this.username = this.authService.currentUserValue.user.firstName + ' ' + this.authService.currentUserValue.user.lastName;
       return true;
-    
     }
-  
     return false;
   
   }
+  @Output() toggleSidenav = new EventEmitter<void>();
+
+  onToggleSidenav() {
+    this.toggleSidenav.emit();
+  }
+
+
 }

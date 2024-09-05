@@ -36,7 +36,7 @@ this.loginForm = this.fb.group({
       this.credential = this.loginForm.value;
       this.authService.login(this.credential).subscribe({
         next: (response) => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/tickets']);
         },
         error: (error: HttpErrorResponse) => {
           console.error('Login failed', error);

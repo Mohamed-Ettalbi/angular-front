@@ -1,9 +1,16 @@
 <mat-toolbar color="primary">
-    <span>EasyTicket</span>
+  <button mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="margin-left: 8px;">EasyTicket</span>
+
     <div class="spacer"></div>
-    <button mat-button [routerLink]="'/dashboard'">Dashboard</button>
-    <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/login'">Login</button>
+    <span class ="username" mat-button *ngIf="isLoggedIn()" >{{username}}</span>
     <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+
+    <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/login'">Login</button>
     <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/register'">Register</button>
+  
+  
   </mat-toolbar>
   

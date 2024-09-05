@@ -1,0 +1,87 @@
+<!-- <mat-card>
+    <mat-card-header>
+      <mat-card-title>Create Ticket</mat-card-title>
+    </mat-card-header>
+    <hr class="header-divider">
+    <mat-card-content>
+      <form [formGroup]="ticketForm" (ngSubmit)="submit()">
+        <div>
+            <label for="title"
+            id="title"
+            formControlName="title"> Title</label>
+        </div>
+        <div>
+            <label for="description"
+            id="description"
+            formControlName="description"> Description</label>
+        </div>
+        <button type="submit" (click)="submit()">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+   
+    
+   -->
+  <!-- <mat-card>
+  <mat-card-header>
+    <mat-card-title>Create Ticket</mat-card-title>
+  </mat-card-header>
+  <hr class="header-divider">
+  <mat-card-content>
+    <form [formGroup]="ticketForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+  </mat-card-content>
+
+</mat-card> -->
+
+<mat-card>
+    <div>
+    <mat-card-header>
+        <mat-card-title>Create Ticket</mat-card-title>
+      </mat-card-header>
+      <hr class="header-divider">
+    <form [formGroup]="ticketForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+      <div class="category-priority-container">
+      <mat-form-field class="priority-field" appearance="fill">
+        <mat-label>Priority</mat-label>
+        <select matNativeControl formControlName="priority">
+          <option value="LOW"> Low</option>
+          <option value="MEDIUM"> Medium</option>
+          <option value="HIGH"> High</option>
+        </select>
+      </mat-form-field>
+  
+      <mat-form-field class="category-field" appearance="fill">
+        <mat-label>Category</mat-label>
+        <select matNativeControl formControlName="ticketCategory">
+            <option class="category-field-options" *ngFor="let category of ticketCategorynames" [value]="category.value">{{ category.name }}</option>
+        </select>
+      </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+  
+  
+      <button mat-raised-button color="primary" type="submit">Creat Ticket</button>
+    </form>
+    </div>
+  </mat-card>
+  

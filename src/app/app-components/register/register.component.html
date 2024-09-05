@@ -1,83 +1,78 @@
 <h2>Register</h2>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()">
-  <div>
-    <label for="firstName">First Name</label>
-    <input
-      type="text"
-      id="firstName"
-      formControlName="firstName"
-    />
-    <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="error">
+  <!-- First Name and Last Name on the same line -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName" />
+      <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="error">
+        <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</small>
+        <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 2 characters.</small>
+        <small *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">First Name cannot exceed 50 characters.</small>
+      </div>
+    </div>
 
-      <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</small>
-      <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 2 characters.</small>
-      <small *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">First Name cannot exceed 50 characters.</small>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName" />
+      <div *ngIf="registerForm.get('lastName')?.invalid &&registerForm.get('lastName')?.touched" class="error">
+        <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</small>
+        <small *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2 characters.</small>
+        <small *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot exceed 50 characters.</small>
+      </div>
     </div>
   </div>
 
-  <div>
-    <label for="lastName">Last Name</label>
-    <input
-      type="text"
-      id="lastName"
-      formControlName="lastName"
-    />
-    <div *ngIf="registerForm.get('lastName')?.invalid &&registerForm.get('lastName')?.touched" class="error">
-      <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</small>
-      <small *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2 characters.</small>
-      <small *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot exceed 50 characters.</small>
+  <!-- Email and Phone on the same line -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" formControlName="phone" />
+      <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error">
+        <small *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
+      </div>
     </div>
   </div>
 
-  <div>
-    <label for="email">Email</label>
-    <input
-      type="email"
-      id="email"
-      formControlName="email"
-    />
-    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
-      <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
-      <small *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+  <!-- Password and Confirm Password on the same line -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password cannot exceed 64 characters.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['password']">
+          Password must contain at least one number, one lowercase letter, one uppercase letter, and one special character.
+        </small>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="phone">Phone</label>
-    <input
-      type="text"
-      id="phone"
-      formControlName="phone"
-    />
-    <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error">
-      <small *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</small>
-      <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
-    </div>
-  </div>
-
-  <div>
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-    />
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
-      <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password cannot exceed 64 characters.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['password']">
-        Password must contain at least one number, one lowercase letter,one UpperCaseletter, and one special character.</small>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" />
+      <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="error">
+        <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</small>
+        <small *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match.</small>
+      </div>
     </div>
   </div>
 
   <div>
     <label for="role">Role</label>
-    <select
-      id="role"
-      formControlName="role"
-    >
+    <select id="role" formControlName="role">
       <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
     </select>
     <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="error">

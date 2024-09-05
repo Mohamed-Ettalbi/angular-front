@@ -1,0 +1,47 @@
+/* 
+  
+  mat-sidenav {
+    width: 200px;
+    background-color: bisque;
+    height: 100;
+  }
+  
+  mat-sidenav-content {
+
+    padding: 16px;
+    overflow-y: visible;
+  } */
+
+
+  
+mat-sidenav {
+  background-color:  #DBE0E5; /* Light Indigo Blue for sidenav background */
+  color: #FFFFFF; /* White text */
+  width: 240px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow on right edge for depth */
+}
+
+mat-nav-list a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFFFFF; /* White text */
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+mat-nav-list a:hover {
+  background-color: #1565C0; /* Darker Indigo Blue on hover */
+  color: #FFFFFF;
+}
+
+mat-nav-list a.active {
+  background-color: #BBDEFB; /* Very Light Blue for active link */
+  color: #0D47A1; /* Indigo Blue for active text */
+}
+
+mat-sidenav-content {
+  padding: 16px;
+  background-color: #ECEFF1; /* Light Gray background for the main content */
+  overflow-y: auto; 
+}

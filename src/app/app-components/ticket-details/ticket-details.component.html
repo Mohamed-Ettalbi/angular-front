@@ -1,0 +1,115 @@
+<!-- <div class="ticket-details-container">
+    <header class="ticket-title-header">
+      <h1>{{ ticket.title }}</h1>
+    </header>
+  
+    <section class="ticket-metadata">
+      <div class="metadata-item">
+        <label>Created By:</label>
+        <span>{{ ticket.createdBy }}</span>
+      </div>
+      <div class="metadata-item">
+        <label>Created On:</label>
+        <span>{{ ticket.createdAt | date:'longDate' }}</span>
+      </div>
+      <div class="metadata-item">
+        <label>Status:</label>
+        <span>{{ ticket.status }}</span>
+      </div>
+      <div class="metadata-item">
+        <label>Priority:</label>
+        <span>{{ ticket.priority }}</span>
+      </div>
+      <div class="metadata-item">
+        <label>Category:</label>
+        <span>{{ ticket.ticketCategoryName }}</span>
+      </div>
+    </section>
+  
+    <section class="ticket-description">
+      <h2>Description</h2>
+      <p>
+        {{ ticket.description }}
+      </p>
+    </section>
+  
+    <section class="ticket-comments">
+      <h2>Comments</h2>
+    </section>
+  
+    <section class="ticket-attachments">
+      <h2>Attachments</h2>
+    </section>
+  </div>
+   -->
+   <!-- <mat-card *ngIf="ticket" class="ticket-detail-card">
+    <mat-card-header>
+      <mat-card-title>Ticket Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="ticket-detail">
+        <p><strong>ID:</strong> {{ ticket.ticketId }}</p>
+        <p><strong>Title:</strong> {{ ticket.title }}</p>
+        <p><strong>Description:</strong> {{ ticket.description }}</p>
+        <p><strong>Category:</strong> {{ ticket.ticketCategoryName }}</p>
+        <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+        <p><strong>Status:</strong> {{ ticket.status }}</p>
+        <p><strong>Created By:</strong> {{ ticket.createdBy }}</p>
+        <p><strong>Created At:</strong> {{ ticket.createdAt | date }}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="/tickets">Back to Tickets</button>
+    </mat-card-actions>
+  </mat-card> -->
+
+  <mat-card class="ticket-detail-card">
+  <!-- Metadata Section -->
+  <mat-card-header style="align-items: center;" class="card-header">
+    <mat-card-title>{{ ticket.title }}</mat-card-title>
+</mat-card-header>
+<hr class="header-divider">
+    <!-- <mat-card-subtitle>
+      <p><strong>Created By:</strong> {{ ticket.createdBy }}</p>
+      <p><strong>Created At:</strong> {{ ticket.createdAt | date }}</p>
+      <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+      <p><strong>Status:</strong> {{ ticket.status }}</p>
+      <p><strong>Category:</strong> {{ ticket.ticketCategoryName }}</p>
+    </mat-card-subtitle> -->
+    <mat-card-subtitle>
+        <div class="info-container">
+          <div class="line">
+            <div class="info-item">
+              <strong>Created By:</strong> {{ ticket.createdBy }}
+            </div>
+            <div class="info-item">
+              <strong>Created At:</strong> {{ ticket.createdAt | date }}
+            </div>
+          </div>
+          <div class="line">
+            <div class="info-item">
+              <strong>Priority:</strong> {{ ticket.priority }}
+            </div>
+            <div class="info-item">
+              <strong>Status:</strong> {{ ticket.status }}
+            </div>
+          </div>
+          <div class="line">
+            <div class="info-item">
+              <strong>Category:</strong> {{ ticket.ticketCategoryName }}
+            </div>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      
+
+  <!-- Description Section -->
+  <mat-card-content>
+    <p><strong>Description:</strong></p>
+    <p>{{ ticket.description }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button routerLink="/tickets">Back to Tickets</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,100 @@
+.header-divider {
+    border: 0; 
+    border-top: 2px solid #CCCCCC; 
+    margin: 0; 
+    padding: 0; 
+    margin-bottom: 30px; 
+    margin-top: 10px;
+  }
+
+
+  mat-card {
+    width: 100%;
+    max-width: 70%; 
+    margin: 0 auto; 
+    margin-bottom:200px;
+  }
+  /* mat-mdc-card-header-text {
+width: 100%;
+  }
+  mat-mdc-card-header-text .mat-card-title {
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    padding: 16px 0;
+  }
+  mat-card-title {
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    padding: 16px 0;
+  }
+   */
+
+   .mat-mdc-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mat-mdc-card-header-text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .mat-mdc-card-title {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .category-priority-container {
+    display: flex;
+    justify-content: center;
+    gap: 20%; 
+    width: 80%;
+    margin: 0 auto;
+   
+  }
+  
+/* .priority-field {
+    width: 40%;
+    display: inline-block;
+    width:40%;
+    margin: 0 auto;
+  }  
+  .category-field {
+    width: 40%;
+    display: inline-block;
+    width:40%;
+    margin: 0 auto;
+  }   */
+  .priority-field,
+  .category-field {
+    width:50%; 
+    display: inline-block; 
+    box-sizing: border-box;
+
+  }
+  mat-form-field {
+    padding-top: 10px;
+    width:80%;
+    display: block;
+    margin: 0 auto;
+
+  }
+ 
+  mat-form-field textarea {
+    height:300px;
+
+  }
+ 
+ button{
+  margin-bottom: 30px;
+  margin-left: 10%;
+  
+ }
+ 
+ /* this is where i change the padding for category and priority fields */
+ .mat-mdc-input-element{  
+padding-left: 10px;
+}

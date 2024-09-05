@@ -37,10 +37,25 @@ export class RegisterComponent implements OnInit {
         phone:['' , [Validators.required, Validators.pattern('^\\d{10}$')]],
         email: ['', [Validators.required, Validators.email] ],
         password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(64), passwordValidator()] ],
+        confirmPassword: ['', [Validators.required]],
         role: ['' , [Validators.required]],
+      }, {
+        validator: this.passwordMatchValidator // Apply the custom validator here
       });
-     }
-
+    }
+  
+    // Custom validator to check if passwords match
+    passwordMatchValidator(formGroup: FormGroup) {
+      const password = formGroup.get('password')?.value;
+      const confirmPassword = formGroup.get('confirmPassword')?.value;
+  
+      if (password !== confirmPassword) {
+        formGroup.get('confirmPassword')?.setErrors({ passwordMismatch: true });
+      } else {
+        formGroup.get('confirmPassword')?.setErrors(null);
+      }
+    }
+  
 
   register(){
     if (this.registerForm.valid) {

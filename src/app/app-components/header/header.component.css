@@ -1,4 +1,4 @@
-.mat-toolbar{
+/* .mat-toolbar{
     background-color: #2980b9;
     color: white;
     padding:15px;
@@ -9,4 +9,25 @@
   }
   .spacer{
     flex: 1 1 auto;
+  }
+  .username{
+    color: white;
+    font-size: 15px;
+    padding-right: 30px;
+
+  } */
+  mat-toolbar {
+    background-color:#8996A4; /* Indigo Blue for primary header color */
+    color: #FFFFFF; /* White text */
+    padding: 0 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }
+  
+  mat-toolbar .spacer {
+    flex: 1 1 auto;
+  }
+  
+  mat-toolbar .username {
+    margin-right: 16px;
+    font-weight: 500;
   }
