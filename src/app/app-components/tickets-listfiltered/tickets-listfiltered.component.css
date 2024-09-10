@@ -1,0 +1,61 @@
+/* 
+  .mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted{
+    background-color: #4CAF50; 
+    color: white; 
+  } */
+  .tickets-table{
+  
+  
+    width: 100%;
+    tr:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+    table-layout: auto; 
+    } 
+    
+     /* General table styles */
+.mat-mdc-paginator-outer-container{
+    width: 100%;
+    min-width: 100%;
+}
+
+        
+
+
+     .mat-mdc-header-row {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(19, 8, 8, 0.1); 
+      }
+      .mat-mdc-form-field.ng-tns-c3736059725-5.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill.mat-primary.ng-star-inserted{
+
+        margin-top: 3%;
+      }
+    
+
+    /* .mat-header-cell {
+        font-weight:bolder;
+        color: #2e0e0e;
+      }
+    
+      .mat-row:hover {
+        background-color: #BBDEFB; 
+      } */
+    
+    a {
+      color: #4c94e7;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      color: #0D47A1;
+    }
+    
+  
+    .mat-elevation-z8 {
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
+    }
+  
+    

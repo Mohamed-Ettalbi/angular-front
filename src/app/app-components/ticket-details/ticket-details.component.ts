@@ -5,11 +5,12 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { TicketDTO } from '../../models/dtos/TicketDTO';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
   selector: 'app-ticket-details',
   standalone: true,
-  imports: [RouterModule, MatCardModule,MatButtonModule,CommonModule, JsonPipe],
+  imports: [CommentsComponent,RouterModule, MatCardModule,MatButtonModule,CommonModule, JsonPipe],
   templateUrl: './ticket-details.component.html',
   styleUrl: './ticket-details.component.css'
 })

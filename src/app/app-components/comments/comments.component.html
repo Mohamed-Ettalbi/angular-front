@@ -1,0 +1,93 @@
+<!-- <h4 class="write-comment-header">Write a comment</h4>
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <textarea id="comment" formControlName="comment"></textarea>
+    <div *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched" class="error">
+      <small *ngIf="commentForm.get('comment')?.errors?.['required']">Comment is required.</small>
+      <small *ngIf="commentForm.get('comment')?.errors?.['minlength']">Comment must be at least 2 characters.</small>
+      <small *ngIf="commentForm.get('comment')?.errors?.['maxlength']">Comment cannot exceed 500 characters.</small>
+    </div>
+  </div>
+  <button type="submit" [disabled]="commentForm.invalid">Submit</button>
+</form>
+<div *ngFor="let comment of comments" class="comment-container">
+    <div class="comment-header">
+      <strong>{{ comment.authorEmail }}</strong>
+      <span class="comment-timestamp">{{ comment.createdAt | date: 'short' }}</span>
+    </div>
+    <div class="comment-body">
+      <p>{{ comment.message }}</p>
+    </div>
+    <button (click)="showReplyForm(comment)" class="reply-button">Reply</button>
+  
+    <div *ngIf="comment.replies?.length" class="replies-container">
+      <div *ngFor="let reply of comment.replies" class="reply">
+        <div class="reply-header">
+          <strong>{{ reply.authorEmail }}</strong>
+          <span class="comment-timestamp">{{ reply.createdAt | date: 'short' }}</span>
+        </div>
+        <div class="reply-body">
+          <p>{{ reply.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+   <h4 class="write-comment-header">Write a comment</h4>
+   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+     <div class="form-group">
+       <textarea id="comment" formControlName="comment" placeholder="Write your comment..."></textarea>
+       <div *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched" class="error">
+         <small *ngIf="commentForm.get('comment')?.errors?.['required']">Comment is required.</small>
+         <small *ngIf="commentForm.get('comment')?.errors?.['minlength']">Comment must be at least 2 characters.</small>
+         <small *ngIf="commentForm.get('comment')?.errors?.['maxlength']">Comment cannot exceed 500 characters.</small>
+       </div>
+     </div>
+    
+      
+     <button type="submit" [disabled]="commentForm.invalid">Submit</button>
+   </form>
+   
+   <div *ngIf="submissionError" class="error-message">
+     There was an error submitting your comment. Please try again.
+   </div>
+   <div *ngFor="let comment of comments">
+    <app-comment [comment]="comment"  ></app-comment>
+  </div>
+  
+    <!--
+   <div *ngFor="let comment of comments" class="comment-container">
+     <div class="comment-header">
+       <strong>{{ comment.authorEmail }}</strong>
+       <span class="comment-timestamp">{{ comment.createdAt | date: 'MMM d, y, h:mm a' }}</span>
+     </div>
+     <div class="comment-body">
+       <p>{{ comment.message }}</p>
+     </div>
+   
+     <button (click)="showReplyBox(comment.id)">Reply</button>
+   
+     <div *ngIf="replyToCommentId === comment.id" class="reply-box">
+       <textarea [(ngModel)]="replyContent" placeholder="Write your reply..."></textarea>
+       <button (click)="submitReply(comment.id)">Submit Reply</button>
+     </div>
+   
+     <div *ngIf="comment.replies?.length" class="replies-container">
+       <div *ngFor="let reply of comment.replies" class="reply">
+         <div class="reply-header">
+           <strong>{{ reply.authorEmail }}</strong>
+           <span class="comment-timestamp">{{ reply.createdAt | date: 'MMM d, y, h:mm a' }}</span>
+         </div>
+         <div class="reply-body">
+           <p>{{ reply.message }}</p>
+         </div>
+         <button (click)="showReplyBox(reply.id)">Reply</button>
+         <div *ngIf="replyToCommentId === reply.id" class="reply-box">
+            <textarea [(ngModel)]="replyContent" placeholder="Write your reply..."></textarea>
+            <button (click)="submitReply(reply.id)">Submit Reply</button>
+          </div>
+        
+     </div>
+   </div>
+    -->
+   <!-- Iterate over all comments, passing them to CommentComponent -->

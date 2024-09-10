@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
 import { TicketService } from '../../Services/ticket.service';
 import { CreateTicketDTO } from '../../models/dtos/CreateTicketDTO';
 import {MatSelectModule} from '@angular/material/select';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 @Component({
   selector: 'app-create-ticket',
   standalone: true,
-  imports: [
+  imports: [FileUploadComponent,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

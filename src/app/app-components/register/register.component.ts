@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../Services/auth-service.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { passwordValidator } from './passwordValidator';
+import { ErrorResponseInterface } from '../../models/ErrorResponseInterface';
 
 
 @Component({
@@ -67,17 +68,20 @@ export class RegisterComponent implements OnInit {
         console.log('Register successful', response);
         this.router.navigate(['']);
       },
-      (error: HttpErrorResponse) => {
+      (errorResponse: HttpErrorResponse) => {
+
+        const error: ErrorResponseInterface = errorResponse.error;
+
+
         console.error('Registration failed', error);
-        if (error.status === 400) {
+        if (error.statusCode === 400) {
           alert('Bad Request: Please check the input values.');
-        } else if (error.status === 409) {
-          alert('Conflict: Email already exists.');
+        } else if (error.statusCode === 409) {
+         console.log (error.statusCode)
+          alert('conflict ' + error.message);;
         } else {
+          console.log(error.statusCode)
           alert('An unexpected error occurred. Please try again later.');
-      
-
-
     }
   });
 

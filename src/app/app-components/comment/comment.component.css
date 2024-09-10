@@ -1,0 +1,125 @@
+/* General comment container styling */
+.comment-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 2%;
+    background-color: #f0f0f0;
+}
+.comment-container textarea{
+    width: 90%;
+    height: 50px;
+    margin-top: 10px;
+
+    margin-bottom: 7px;
+}
+.comment-container button{
+    margin-top: 10px;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+
+/* Header styling for both comments and replies */
+.comment-header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Comment body styling */
+.comment-body {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Timestamp styling */
+.comment-timestamp {
+    font-size: 12px;
+    color: #888;
+}
+
+.reply-comment {
+    margin-left:10%; /* Indent all replies slightly */
+    border-left: 2px solid #ccc; /* Add a visual cue (border) for replies */
+    padding-left: 15px;
+    margin-top: 15px;
+    background-color: #f9f9f9;
+
+   
+}
+.reply-comment textarea{
+
+    max-width: 100%;
+    min-width: 90%;
+
+    width:90%;
+    height: 60px;
+    min-height: 50px;
+    max-height: 100px;
+}
+
+
+
+.reply-comment button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.main-button-container{
+
+    display: flex;
+    justify-content: flex-start;
+    
+   
+}
+.main-button-container.reply-button{
+    background-color: blue;
+    margin-right: 1%;
+}
+.main-button-container.edit-button{
+    background-color: blue;
+    margin-right: 1%;    
+}
+.main-button-container.delete-button{
+    background-color: blue;
+
+}
+
+.reply-comment  button:hover {
+    background-color: #0056b3;
+}
+
+.reply-buttons-container{
+width: 90%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+.submit-reply_button{
+    background-color: blue;
+    color: #0056b3;
+}
+.submit-update_button{
+    background-color: blue;
+    color: #0056b3;
+}
+.cancel_button{
+    background-color: blue;
+    color: #0056b3;
+    margin-left:1%  
+}
+.edit-buttons-container{
+    width: 90%;
+        display: flex;
+        justify-content: flex-end;
+    
+    }

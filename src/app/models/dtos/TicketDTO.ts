@@ -10,19 +10,5 @@ export interface TicketDTO {
     createdAt: string; 
     updatedAt: string; 
     resolvedAt: string | null; 
+    createdBy: string | null;
 }
-
-// Example usage
-const exampleTicket: TicketDTO = {
-    ticketId: 3,
-    title: "3 ticket",
-    description: "this is the 3 ticket in the new db",
-    status: "OPEN",
-    priority: "LOW",
-    ticketCategoryName: "Hardware Issues",
-    assignedTo: null,
-    assignedGroup: null,
-    createdAt: "2024-08-28T10:16:36.431916",
-    updatedAt: "2024-08-28T10:16:36.431916",
-    resolvedAt: null
-};

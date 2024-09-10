@@ -1,0 +1,46 @@
+<div class="comment-container" [ngClass]="{'reply-comment': comment.parrentCommentId}" >
+        <div class="comment-header">
+        <strong>{{ comment.authorEmail }}</strong>
+        <span class="comment-timestamp">{{ comment.createdAt | date: 'MMM d, y, h:mm a' }}</span>
+        </div>
+  
+        <div class="comment-body">
+        <p>{{ comment.message }}</p>
+        </div>
+  <div class="main-button-container"> 
+    <button class="main-button-container reply-button" (click)="toggleReplyBox()">Reply</button>
+    <button class="main-button-container edit-button" (click)="toggleEditBox()">Edit</button>
+    <button class="main-button-container delete-button" (click)="deleteComment(comment.id)">Delete</button>
+
+</div>
+
+
+
+
+    <div *ngIf="showReplyBox">
+        <textarea [(ngModel)]="replyContent" placeholder="Write your reply..."></textarea>
+       <div class="reply-buttons-container">
+            <button class="submit-reply_button" (click)="submitReply()">Submit Reply</button>
+            <button  class="cancel_button" (click)="cancelReplyBox()">Cancel</button>
+       </div>
+    </div>
+    
+    <div *ngIf="editBox">
+        <textarea [(ngModel)]="replyContent" placeholder="Update your Comment..."></textarea>
+        <div class="edit-buttons-container">
+            <button class="submit-update_button" (click)="updateComment(comment.authorEmail , comment.id)">Submit Update</button>
+            <button class="cancel_button" (click)="cancelEditBox()">Cancel</button>
+        </div>    
+    </div>
+    
+
+</div>
+    <div *ngIf="comment.replies && comment.replies.length > 0" class="replies-container">
+        <div *ngFor="let reply of comment.replies">
+        <app-comment [comment]="reply"  ></app-comment>
+       </div>
+
+    </div>
+
+
+  

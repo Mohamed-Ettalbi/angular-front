@@ -17,8 +17,9 @@
 mat-sidenav {
   background-color:  #DBE0E5; /* Light Indigo Blue for sidenav background */
   color: #FFFFFF; /* White text */
-  width: 240px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow on right edge for depth */
+  width: 200px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); 
+
 }
 
 mat-nav-list a {

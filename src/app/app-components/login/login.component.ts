@@ -36,7 +36,16 @@ this.loginForm = this.fb.group({
       this.credential = this.loginForm.value;
       this.authService.login(this.credential).subscribe({
         next: (response) => {
-          this.router.navigate(['/tickets']);
+          const role = this.authService.decodeToken().role[0];
+          console.log('Role:', role);
+          if (role === 'ROLE_EMPLOYEE') {
+
+            this.router.navigate(['/tickets']);
+
+          }else{
+
+          this.router.navigate(['/rolebasedtickets']);
+        }
         },
         error: (error: HttpErrorResponse) => {
           console.error('Login failed', error);

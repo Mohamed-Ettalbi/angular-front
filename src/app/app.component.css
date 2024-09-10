@@ -1,1 +1,32 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent double scrollbars */
+}
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+app-header {
+  flex-shrink: 0; 
+}
+
+.content-container {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+}
+
+app-sidenav {
+    flex-grow: 1;
+
+  overflow-y: auto; /* Sidenav content can scroll if it becomes too large */
+}
+
+router-outlet {
+  overflow-y: auto; /* Other content can scroll as well */
+}

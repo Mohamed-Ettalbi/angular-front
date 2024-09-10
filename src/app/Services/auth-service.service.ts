@@ -6,6 +6,9 @@ import { Credentials } from '../models/Credentials';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +20,10 @@ export class AuthService{
   private apiUrl = 'http://localhost:8081/api/auth';
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    public jwtHelper: JwtHelperService
+
+  
   ) {
     this.currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -30,7 +36,6 @@ export class AuthService{
 
   register(user: User): Observable<AuthResponse>{ 
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, user);
-
   }
  
   
@@ -52,7 +57,38 @@ export class AuthService{
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
+  scheduleAutoLogout() {
+    const token =this.currentUserValue ? this.currentUserValue.token : null;
+    console.log('Token:', token);
+   
+    if (token) {
+      const expirationDate = this.jwtHelper.getTokenExpirationDate(token);
+      console.log('Expiration Date:', expirationDate);
+      if (expirationDate) {
+        const timeout = expirationDate.getTime() - Date.now(); 
+        console.log('Timeout:', timeout);
+  
+        if (timeout > 0) {
+
+          setTimeout(() => this.logout(), timeout);
+          
+        }
+        console.log("your session has timed out")
+     
+    }
+  }
   
 
+}
+public decodeToken(): any {
+  const token = this.currentUserValue ? this.currentUserValue.token : null;
+  if (token) {
+    const decoded=  this.jwtHelper.decodeToken(token);
+    if (decoded && decoded.role && decoded.role.length > 0) {
+      return decoded; 
+  }
 
+  }
+  return null;
+}
 }

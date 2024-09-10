@@ -8,8 +8,9 @@ import { MatPaginator ,MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Router, RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../Services/auth-service.service';
+import { ErrorResponseInterface } from '../../models/ErrorResponseInterface';
 @Component({
   selector: 'app-tickets',
   standalone: true,
@@ -67,36 +68,41 @@ ngOnInit(): void {
     this.router.navigate(['/edit', ticketId]);
   }
 
-  deleteTicket(id: number): void {
-    // this.ticketService.deleteticket(id).subscribe({
-    //   next: (response: HttpResponse<any>) => {
-       
-    //     console.log('Ticket deleted successfully.');
-    //     console.log('Status code:', response.status);
+ 
+  deleteTicket(id: number) {
+    this.ticketService.deleteTicket(id).subscribe({
+   
+      next: () => {
+      
         
-    //   },
-    //   error: (error) => {
-    //     console.error('Error deleting ticket:', error);
-       
-    //   }
-    // });
-    console.log('Ticket deleted successfully.');
+          console.log('Ticket deleted successfully');
+          this.getTickets(); 
+        
+      },
+      error: (errorResponse : HttpErrorResponse) =>{
+         console.error('Error deleting ticket:', errorResponse)
+         const error: ErrorResponseInterface = errorResponse.error;
+         console.error('Error:', error);
+
+        }
+    });
+   
   }
 
   getTickets() {
 
-    const role  = this.authService.decodeToken().role[0];
-    console.log(role);
-    if(role === 'ROLE_ADMIN'){
-      this.ticketService.getTickets().subscribe((tickets) => {
-        this.ticketDTO = tickets;
-        this.dataSource.data = this.ticketDTO;
-        this.paginator?.pageIndex ?? 0;
-        this.paginator?.pageSize ?? 5;
-        console.log(tickets);
-      });
+    // const role  = this.authService.decodeToken().role[0];
+    // console.log(role);
+    // if(role === 'ROLE_ADMIN'){
+    //   this.ticketService.getTickets().subscribe((tickets) => {
+    //     this.ticketDTO = tickets;
+    //     this.dataSource.data = this.ticketDTO;
+    //     this.paginator?.pageIndex ?? 0;
+    //     this.paginator?.pageSize ?? 5;
+    //     console.log(tickets);
+    //   });
 
-    }else{
+    // }else{
   const email =this.authService.decodeToken().sub;
   
 
@@ -108,7 +114,7 @@ ngOnInit(): void {
       this.paginator?.pageSize ?? 5;
       console.log(tickets);
     });
-  }
+  
 }
 
 
