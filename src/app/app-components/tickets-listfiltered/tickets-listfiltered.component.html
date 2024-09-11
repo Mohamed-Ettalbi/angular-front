@@ -1,4 +1,21 @@
 <div class="mat-elevation-z8">
+
+<mat-tab-group (selectedIndexChange)="onTabChange($event)">
+  <mat-tab label="Open Tickets"></mat-tab>
+  <mat-tab label="IN_PROGRESS Tickets"></mat-tab>
+  <mat-tab label="Closed Tickets"></mat-tab>
+  <mat-tab label="All"></mat-tab>
+
+
+</mat-tab-group>
+
+<div class="filter-container">
+  <mat-checkbox *ngIf="role === 'ROLE_TECHNICIAN'" [(ngModel)]="filterAssignedToMe" (change)="applyFilters()">
+    Assigned to Me
+  </mat-checkbox>
+</div>
+
+<div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="tickets-table mat-elevation-z8">
       
       <!-- ID Column -->
@@ -46,6 +63,11 @@
         <th mat-header-cell *matHeaderCellDef  sticky> Technician </th>
         <td mat-cell *matCellDef="let ticket">  {{ticket.assignedTo}} </td>      
       </ng-container>
+          <!-- Assinged Group-->
+          <ng-container matColumnDef="assignedGroup">
+            <th mat-header-cell *matHeaderCellDef  sticky> Group </th>
+            <td mat-cell *matCellDef="let ticket">  {{ticket.assignedGroup}} </td>      
+          </ng-container>
   
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">

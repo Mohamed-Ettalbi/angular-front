@@ -81,4 +81,7 @@ submitReply(commentId: number): void {
     }
   });
 }
+handlerefresh(): void {
+  this.loadComments();
+}
 }

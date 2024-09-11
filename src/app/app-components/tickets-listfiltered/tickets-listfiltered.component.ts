@@ -11,11 +11,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../Services/auth-service.service';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tickets-listfiltered',
   standalone: true,
-  imports: [MatSortModule,RouterModule,MatButtonModule,
+  imports: [FormsModule,MatCheckboxModule,MatTabsModule,MatSortModule,RouterModule,MatButtonModule,
     MatSelectModule
     ,CommonModule
     ,JsonPipe ,
@@ -32,9 +35,11 @@ export class TicketsListfilteredComponent  implements OnInit , AfterViewInit{
   ticketDTO: TicketDTO[] = [];
   role : string | undefined;
   email : string | undefined;
+  
+  currentStatusFilter = 'OPEN'; 
+  filterAssignedToMe = false; 
 
-
-  displayedColumns: string[] = ['ticketId', 'title', 'ticketCategoryName','priority', 'status','AssignedTO', 'actions'];
+  displayedColumns: string[] = ['ticketId', 'title', 'ticketCategoryName','priority', 'status','assignedGroup','AssignedTO', 'actions'];
   dataSource = new MatTableDataSource<TicketDTO>([]);
 
   @ViewChild(MatPaginator)
@@ -48,35 +53,38 @@ export class TicketsListfilteredComponent  implements OnInit , AfterViewInit{
 
     this.dataSource.sort = this.sort;
 
-    // this.dataSource.sortingDataAccessor = (item, property) => {
-    //   switch (property) {
-    //     case 'status':
-    //       return this.getStatusOrder(item.status);
-    //     default:
-    //       return (item as any)[property];
-    //   }
-    // };
+  
 
-    this.sort.active = 'status';
+    this.sort.active = 'ticketId';
     this.sort.direction = 'asc';
     this.dataSource.sort = this.sort;
   }
 
-  // getStatusOrder(status: string): number {
-  //     const order: { [key: string]: number } = {
-  //       'OPEN': 1,
-  //       'IN_PROGRESS': 2,
-  //       'CLOSED': 3
-  //     };
-  //     return order[status] || 4;
-  // }
   
+  // onTabChange(index: number) {
+  //   this.currentStatusFilter = index === 0 ? 'OPEN' : 'CLOSED';
+  //   this.applyFilters();
+  // }
+  onTabChange(index: number): void {
+    const statuses = ['OPEN', 'IN_PROGRESS', 'CLOSED','']; 
+    this.currentStatusFilter = statuses[index];
+    this.applyFilters();
+  }
+  
+  applyFilters() {
+    this.dataSource.data = this.ticketDTO.filter(ticket => {
+      const matchesStatus = this.currentStatusFilter ? ticket.status === this.currentStatusFilter : true;
+      const matchesTechnician = !this.filterAssignedToMe || ticket.assignedTo === this.email;
+      return matchesStatus && matchesTechnician;
+    });
+  }
   
 
 ngOnInit(): void {
   this.setUserRoleAndEmail();
 
     this.getTickets();
+    this.applyFilters();
   }
 
   setUserRoleAndEmail(): void {
@@ -107,7 +115,6 @@ ngOnInit(): void {
       next: () => {
           console.log('Ticket status updated successfully');
           this.getTickets(); 
-       
       },
       error: (error) => {console.error('Error updating ticket status:', error);
     }
@@ -164,6 +171,8 @@ this.ticketService.takeTicket(ticketId,email).subscribe({
         this.dataSource.data = this.ticketDTO;
         this.paginator?.pageIndex ?? 0;
         this.paginator?.pageSize ?? 5;
+        this.applyFilters();
+
         console.log(tickets);
       });
 
@@ -171,9 +180,12 @@ this.ticketService.takeTicket(ticketId,email).subscribe({
   const email =this.authService.decodeToken().sub;
      this.ticketService.getTickets(email).subscribe((tickets) => {
       this.ticketDTO = tickets;
+      this.applyFilters();
       this.dataSource.data = this.ticketDTO;
       this.paginator?.pageIndex ?? 0;
       this.paginator?.pageSize ?? 5;
+      this.applyFilters();
+
       console.log(tickets);
     });
   }

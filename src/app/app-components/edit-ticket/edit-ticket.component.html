@@ -7,6 +7,15 @@
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title">
+        <mat-error *ngIf="ticketForm.get('title')?.hasError('required') && ticketForm.get('title')?.touched">
+          Title is required.
+        </mat-error>
+        <mat-error *ngIf="ticketForm.get('title')?.hasError('minlength') && ticketForm.get('title')?.touched">
+          Title must be at least 3 characters long.
+        </mat-error>
+        <mat-error *ngIf="ticketForm.get('title')?.hasError('maxlength') && ticketForm.get('title')?.touched">
+          Title cannot exceed 100 characters.
+        </mat-error>
       </mat-form-field>
   
       <div class="category-priority-container">
@@ -17,27 +26,45 @@
             <option value="MEDIUM">Medium</option>
             <option value="HIGH">High</option>
           </select>
+          <mat-error *ngIf="ticketForm.get('priority')?.hasError('required') && ticketForm.get('title')?.touched">
+            priority is required.
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field class="category-field" appearance="fill">
           <mat-label>Category</mat-label>
           <select matNativeControl formControlName="ticketCategory">
             <option *ngFor="let category of ticketCategorynames" [value]="category.value">{{ category.name }}</option>
-
-            <!-- <option value="1">Category 1</option>
-            <option value="2">Category 2</option>
-            <option value="3">Category 3</option> -->
-            
           </select>
+          <mat-error *ngIf="ticketForm.get('ticketCategory')?.hasError('required') && ticketForm.get('title')?.touched">
+            Ticket Category is required.
+          </mat-error>
         </mat-form-field>
       </div>
   
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="ticketForm.get('description')?.hasError('required') && ticketForm.get('title')?.touched">
+          Description is required.
+        </mat-error>
+        <mat-error *ngIf="ticketForm.get('description')?.hasError('minlength') && ticketForm.get('title')?.touched">
+          Description must be at least 10 characters long.
+        </mat-error>
+        <mat-error *ngIf="ticketForm.get('description')?.hasError('maxlength') && ticketForm.get('title')?.touched">
+          Description cannot exceed 1000 characters.
+        </mat-error>
       </mat-form-field>
+
+
+
+    <div class="update-upload-button-container">
+      <div>
+        <app-file-upload  (onFilesReady)="handleFilesReady($event)" [ticketId]="ticketId"></app-file-upload>
+      </div>
   
-      <button mat-raised-button color="primary" type="submit">Update Ticket</button>
+      <button class="update-button" mat-raised-button color="primary" type="submit">Update Ticket</button>
+    </div>
     </form>
   </mat-card>
   

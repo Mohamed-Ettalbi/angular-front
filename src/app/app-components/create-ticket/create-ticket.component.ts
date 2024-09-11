@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +9,9 @@ import { TicketService } from '../../Services/ticket.service';
 import { CreateTicketDTO } from '../../models/dtos/CreateTicketDTO';
 import {MatSelectModule} from '@angular/material/select';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { Router } from '@angular/router';
+import { AuthService } from '../../Services/auth-service.service';
+
 @Component({
   selector: 'app-create-ticket',
   standalone: true,
@@ -25,10 +28,13 @@ import { FileUploadComponent } from '../file-upload/file-upload.component';
   styleUrls: ['./create-ticket.component.css'] // Corrected 'styleUrl' to 'styleUrls'
 })
 export class CreateTicketComponent implements OnInit {
-  constructor(private fb: FormBuilder, private ticketService:TicketService) { }
+  constructor(private authService: AuthService,
+    private fb: FormBuilder, private ticketService:TicketService, private router: Router) { }
 
   ticketForm!: FormGroup;
   createTicketDTO !: CreateTicketDTO
+
+  
   // ngOnInit(): void {
   //   this.ticketForm = this.fb.group({
   //     title: [''],
@@ -44,40 +50,15 @@ export class CreateTicketComponent implements OnInit {
   ]
   ngOnInit(): void {
     this.ticketForm = this.fb.group({
-      title: [''],
-      description: [''],
-      priority: [''], // Add priority field
-      ticketCategory: [''] // Add category field
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+      priority: ['', Validators.required], 
+      ticketCategory: ['', Validators.required] 
     });
   }
   
 
-//   submit() {
-//     if (!this.ticketForm.valid) {
-//       console.error('Invalid form');
-//       return;
-//     }else{
-//       this.createTicketDTO={
-//         title:this.ticketForm.get('title')?.value,
-//         description:this.ticketForm.get('description')?.value,
-//         priority: 'LOW',
-//         ticketCategory: 2
 
-//       }
-    
-   
-//     this.ticketService.createTicket(this.createTicketDTO).subscribe({
-//       next: () => {
-//         console.log('Ticket created');
-//       },
-//       error: (error) => {
-//         console.error('Failed to create ticket', error);
-//       }
-//     });
-//     console.log('DTO sent :', this.createTicketDTO);
-
-//   }
-// }
 submit() {
   if (!this.ticketForm.valid) {
     console.error('Invalid form');
@@ -86,13 +67,24 @@ submit() {
     this.createTicketDTO = {
       title: this.ticketForm.get('title')?.value,
       description: this.ticketForm.get('description')?.value,
-      priority: this.ticketForm.get('priority')?.value, // Retrieve priority value
-      ticketCategory: this.ticketForm.get('ticketCategory')?.value // Retrieve category value
+      priority: this.ticketForm.get('priority')?.value, 
+      ticketCategory: this.ticketForm.get('ticketCategory')?.value 
     }
 
     this.ticketService.createTicket(this.createTicketDTO).subscribe({
       next: () => {
         console.log('Ticket created');
+        const role = this.authService.decodeToken().role[0];
+        console.log('Role:', role);
+        if (role === 'ROLE_EMPLOYEE') {
+
+          this.router.navigate(['/tickets']);
+
+        }else{
+
+        this.router.navigate(['/rolebasedtickets']);
+      }
+
       },
       error: (error) => {
         console.error('Failed to create ticket', error);

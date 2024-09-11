@@ -1,3 +1,12 @@
 .file-input{
   display: none;
 }
+
+.chips-and-text-container {
+  position: absolute; /* Change to relative to stay within the mat-card */
+  width: 100%; 
+  padding-top: 10px;
+  z-index: 1; /* You can adjust z-index based on other elements if needed */
+  margin-bottom: 20px; /* Adds space between chips and other content */
+  box-sizing: border-box; /* Ensures proper width calculation */
+}

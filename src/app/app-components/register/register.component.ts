@@ -59,7 +59,15 @@ export class RegisterComponent implements OnInit {
   
 
   register(){
-    if (this.registerForm.valid) {
+    this.registerForm.markAllAsTouched(); 
+
+    if (this.registerForm.invalid) {
+      
+      const firstInvalidControl: HTMLElement = document.querySelector('form .ng-invalid')!;
+      firstInvalidControl.focus();
+      alert('Please fill in all fields correctly.');
+      return; 
+    }
       this.user = this.registerForm.value;
       console.log(this.user);
 
@@ -87,6 +95,5 @@ export class RegisterComponent implements OnInit {
 
 
 }
-else{alert('Please fill in all the fields correctly');}
-}
+
 }

@@ -26,10 +26,6 @@ export class CommentService {
   }
 
   deleteComment(commentId: number):  Observable<HttpResponse<any>> {
-    return this.http.delete(`${this.apiUrl}/delete/${commentId}` , 
-      { 
-      observe: 'response',
-      responseType: 'text' 
-  });
+    return this.http.delete<any>(`${this.apiUrl}/delete/${commentId}` );
   }
 }

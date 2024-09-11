@@ -37,7 +37,8 @@
 
     <div class="form-group">
       <label for="phone">Phone</label>
-      <input type="text" id="phone" formControlName="phone" />
+      <!-- <input type="text" id="phone" formControlName="phone" /> -->
+      <input type="number" id="phone" formControlName="phone" pattern="\d*" />
       <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error">
         <small *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</small>
         <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
@@ -79,6 +80,6 @@
       <small *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</small>
     </div>
   </div>
-  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  <button type="submit" (click)="register()">Register</button>
   <a href="/login"> Already have an account? Login here.</a>
 </form>

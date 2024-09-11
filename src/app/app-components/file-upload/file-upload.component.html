@@ -4,8 +4,27 @@
 
 <div class="file-upload">
 
-  {{ fileNames.length ? fileNames.join(', ') : "No file uploaded yet." }}
-  <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+ 
+  <button mat-mini-fab color="primary" class="upload-btn" (click)="handleFileUploadClick(); fileUpload.click(); $event.preventDefault();">
     <mat-icon>attach_file</mat-icon>
     </button>
+
+<div class="chips-and-text-container">
+    <div *ngIf="fileNames.length > 0; else noFiles">
+ 
+      <mat-chip *ngFor="let fileName of fileNames; let i = index" 
+                [removable]="true" 
+                (removed)="removeFile(i)">
+        {{ fileName }}
+        <button mat-icon-button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+ 
+  </div>
+    <ng-template #noFiles>
+      <p *ngIf="fileUploadTouched">No file uploaded yet.</p>  
+      </ng-template>
+  </div>
+    
 </div>

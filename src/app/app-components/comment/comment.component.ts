@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommentInterface } from '../../models/CommentInterface';
 import { CommentService } from '../../Services/comment.service';
 import { CommonModule } from '@angular/common';
@@ -14,8 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class CommentComponent {
   constructor(private commentService: CommentService) {}
  
-
-
+  @Output() refresh = new EventEmitter<void>(); 
   @Input() comment!: CommentInterface;
   replyContent: string = '';
   replyToCommentId: number | null = null;
@@ -50,6 +49,9 @@ export class CommentComponent {
     this.commentService.updateComment(commentId,authorEmail,this.replyContent)
     .subscribe({
       next: (updatedComment:CommentInterface)=>{
+        this.refresh.emit();
+        this.comment = updatedComment;
+
         console.log("the new comment: " ,updatedComment)
         console.log("comment updated successfully");
         this.cancelEditBox();
@@ -64,14 +66,17 @@ export class CommentComponent {
   }
   deleteComment(commentId: number){
     console.log('trying to delte comment .....');
+    console.log("signal emitted");
+
 
     this.commentService.deleteComment(commentId).subscribe({
 
       next: (response)=>{
-        if (response.status === 200) {
-          console.log('Comment deleted successfully');
-        }
-      },
+      
+          console.log('Comment deleted successfully', response);
+          this.refresh.emit();
+
+              },
       error:(error)=> console.error("Error deleting comment with id :" , error)
     });
   
@@ -86,6 +91,7 @@ export class CommentComponent {
         parrentCommentId: this.comment.id,  
         ticketId: this.comment.ticketId,
         replies: [] 
+
       };
       console.log(reply);
 
@@ -93,10 +99,12 @@ export class CommentComponent {
       .subscribe((newReply: CommentInterface) => {
         if (!this.comment.replies) {
           this.comment.replies = [];  
+          
         }
         this.comment.replies.push(newReply);  
         this.replyContent = '';  
         this.showReplyBox = false;  
+        this.refresh.emit();
       });
     }
   }

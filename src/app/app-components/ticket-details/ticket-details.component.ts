@@ -6,19 +6,27 @@ import { TicketDTO } from '../../models/dtos/TicketDTO';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommentsComponent } from '../comments/comments.component';
+import { AttachmentDTO } from '../../models/dtos/AttachmentDTO';
+import { AttachmentService } from '../../Services/attachment.service';
+import { MatListModule } from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-ticket-details',
   standalone: true,
-  imports: [CommentsComponent,RouterModule, MatCardModule,MatButtonModule,CommonModule, JsonPipe],
+  imports: [MatListModule,
+    MatIconModule,CommentsComponent,RouterModule, MatCardModule,MatButtonModule,CommonModule, MatTableModule,JsonPipe],
   templateUrl: './ticket-details.component.html',
   styleUrl: './ticket-details.component.css'
 })
 export class TicketDetailsComponent implements OnInit {
-
+  attachments: AttachmentDTO[] = [];
   constructor(
     private route: ActivatedRoute,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private attachmentService: AttachmentService
   ) {}
   ticket: TicketDTO ={
     ticketId: 0,
@@ -43,8 +51,39 @@ export class TicketDetailsComponent implements OnInit {
         this.ticket.createdBy = ticket.createdBy ? ticket.createdBy : 'Unassigned';
 
       });
+     this.loadAttachments(id);
     }
   }
+
+  loadAttachments(ticketid: number): void {
+    this.attachmentService.getAttachmentsByTicketId(ticketid).subscribe({
+      next: (attachments) => {
+        this.attachments = attachments;
+      },
+      error: (error) => {
+        console.error('Failed to load attachments', error);
+      }
+    });
+  }
+  getAttachmentId(fileDownloadUri:string):number {
+    const parts = fileDownloadUri.split('/');
+    return +parts[parts.length - 1];
+  }
+  deleteAttachment(fileDownloadUri: string): void {
+    const attachmentId = this.getAttachmentId(fileDownloadUri);
+    console.log('Deleting attachment with ID:', attachmentId);
+    this.attachmentService.deleteAttachemntByid(attachmentId).subscribe({
+
+          next: (response) => {
+            console.log('Attachment deleted successfully', response);
+            this.loadAttachments(this.ticket.ticketId);
+          },
+          error: (error) => {
+            console.error('Failed to delete the attachment', error);
+          }
+        });
+      }
+
 }
 
 

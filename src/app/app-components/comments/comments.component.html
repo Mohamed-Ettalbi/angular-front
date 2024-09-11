@@ -52,7 +52,7 @@
      There was an error submitting your comment. Please try again.
    </div>
    <div *ngFor="let comment of comments">
-    <app-comment [comment]="comment"  ></app-comment>
+    <app-comment [comment]="comment" (refresh)="handlerefresh()"   ></app-comment>
   </div>
   
     <!--
