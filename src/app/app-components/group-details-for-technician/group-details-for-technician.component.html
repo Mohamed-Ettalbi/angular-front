@@ -1,0 +1,36 @@
+<div class="mat-elevation-z8">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> {{ group.groupName }} </mat-card-title>
+        <mat-card-subtitle>ID: {{ group.groupId }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+  
+      <mat-card-content>
+        <p class="preformatted-text"><strong>Description:</strong> {{ group.groupDescription }}</p>
+  
+        <!-- Technicians in the group -->
+        <h3>Technicians in {{ group.groupName }}</h3>
+        <mat-accordion multi="true">
+          <mat-expansion-panel *ngFor="let technician of group.technicianDTOResponseList">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h4>{{ technician.firstName }} {{ technician.lastName }}</h4>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <!-- Display technician-specific tickets -->
+            <h4>Tickets Assigned to {{ technician.email }}</h4>
+            <div *ngIf="ticketsLoaded" class="tickets-container">
+              <div *ngFor="let ticket of filterTicketsForTechnician(technician.email)" class="ticket-item">
+                <span class="ticket-id">Ticket ID: {{ ticket.ticketId }}</span>
+                <span class="ticket-title">Title: {{ ticket.title }}</span>
+                <span class="ticket-status">Status: {{ ticket.status }}</span>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

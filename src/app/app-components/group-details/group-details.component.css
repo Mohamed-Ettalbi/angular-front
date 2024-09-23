@@ -1,0 +1,143 @@
+/* .tickets-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .ticket-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
+    margin-bottom: 0px;
+  }
+   */
+
+/* Main layout adjustments */
+.mat-elevation-z8 {
+  padding: 20px;
+  background-color: #f9f9f9; /* Light neutral background */
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Group information */
+mat-card {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #002366; /* Dark blue for group title */
+}
+
+mat-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+mat-divider {
+  margin: 15px 0;
+}
+
+mat-card-content p {
+  font-size: 1rem;
+  color: #444;
+}
+
+mat-card-content h3 {
+  color: #1b5e20; /* Dark green for subtitles */
+  font-size: 1.2rem;
+}
+
+/* Technician panel */
+.mat-expansion-panel-header {
+  background-color: #f0f4f8; /* Subtle blue background */
+  padding: 5px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.mat-expansion-panel-header:hover {
+  background-color: #d6e6f2; /* Slightly darker on hover */
+}
+
+.mat-expansion-panel {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #ffffff; /* White background for clean look */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mat-expansion-panel-header mat-panel-title {
+  font-weight: bold;
+  color: #1a237e; /* Darker blue for technician names */
+}
+
+.mat-expansion-panel-header mat-panel-description {
+  color: #666; /* Neutral color for descriptions */
+  font-size: 0.85rem;
+}
+
+/* Technician ticket details */
+.tickets-container {
+  padding: 10px;
+  background-color: #f8f9fa; /* Light grey background for ticket container */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.ticket-item {
+  padding: 8px 0;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.ticket-id, .ticket-title, .ticket-status {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.ticket-status {
+  font-weight: bold;
+  color: #2e7d32; /* Dark green for ticket status */
+}
+
+.mat-button {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.mat-button:hover {
+  background-color: #e3f2fd; /* Lighter blue on hover */
+}
+.preformatted-text{
+  white-space: pre-wrap;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+.mat-expansion-panel-header {
+  padding-right: 30px; /* To allow space for the button */
+}
+
+/* Style the 'X' icon to be in the top-right corner */
+.mat-expansion-panel-header .remove-icon {
+  color: #f44336; /* Red for 'Remove' action */
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: auto; /* Align the icon to the far right */
+  transition: color 0.3s ease;
+}
+
+/* Hover effect: Tooltip will appear, and icon color will change */
+.mat-expansion-panel-header .remove-icon:hover {
+  color: #d32f2f; /* Darker red on hover */
+}

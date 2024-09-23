@@ -33,5 +33,9 @@ export class SidenavComponent {
     this.opened = !this.opened;
     console.log('button clicked')
   }
-
+  hasRole(allowedRoles: string[]): boolean {
+    const currentUser = this.authService.decodeToken();
+    const userRole = currentUser?.role[0]; // Assuming the role is in an array, adjust this based on your token structure
+    return allowedRoles.includes(userRole);
+  }
 }

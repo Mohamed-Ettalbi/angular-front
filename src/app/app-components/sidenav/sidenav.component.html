@@ -1,22 +1,4 @@
-<!-- <mat-sidenav-container >
-    <mat-sidenav   *ngIf="canBeOpened()" 
-    [(opened)]="opened"
-    mode="side">
-      
-        <mat-nav-list>
-        <a mat-list-item routerLink="/tickets">
-          <span>Tickets</span>
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <h2>Content</h2>
-      <button (click)="opened = !opened">Toggle Sidenav</button>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-   -->
+<!-- 
    <mat-sidenav-container>
     <mat-sidenav [opened]="opened" mode="side">
       <mat-nav-list>
@@ -26,11 +8,48 @@
         <a mat-list-item routerLink="/create">
           <span>Create A Ticket</span>
         </a>
-      </mat-nav-list>
+        <a mat-list-item routerLink="/users">
+          <span>Users Info</span>
+        </a>
+        <a mat-list-item routerLink="/groups">
+          <span>Groups Info</span>
+        </a>
+        </mat-nav-list>
     </mat-sidenav>
     
     <mat-sidenav-content style="margin-bottom: 30px;">
     
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+   -->
+
+   <mat-sidenav-container>
+    <mat-sidenav [opened]="opened" mode="side">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/tickets" *ngIf="hasRole(['ROLE_ADMIN', 'ROLE_TECHNICIAN', 'ROLE_EMPLOYEE'])">
+          <span>Tickets</span>
+        </a>
+  
+        <a mat-list-item routerLink="/create" *ngIf="hasRole(['ROLE_ADMIN', 'ROLE_EMPLOYEE'])">
+          <span>Create A Ticket</span>
+        </a>
+  
+        <a mat-list-item routerLink="/users" *ngIf="hasRole(['ROLE_ADMIN'])">
+          <span>Users Info</span>
+        </a>
+  
+        <a mat-list-item routerLink="/groups" *ngIf="hasRole(['ROLE_ADMIN'])">
+          <span>Groups Info</span>
+        </a>
+        
+        <a mat-list-item routerLink="/grouptech" *ngIf="hasRole(['ROLE_TECHNICIAN'])">
+          <span>Groups Info</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content style="margin-bottom: 30px;">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

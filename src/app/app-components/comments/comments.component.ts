@@ -18,6 +18,7 @@ export class CommentsComponent implements OnInit {
 
   @Input() ticketId!: number;
  comments: CommentInterface[] = [];
+
   commentForm!: FormGroup;  
   submissionError = false;
 
@@ -27,18 +28,25 @@ export class CommentsComponent implements OnInit {
     this.loadComments();
 
     this.commentForm = this.fb.group({
-      comment: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]], // Validators should be in an array
+      comment: ['', [Validators.minLength(2), Validators.maxLength(500)]], // Validators should be in an array
     });
   }
 
   loadComments(): void {
     this.commentsService.getCommentsByTicketId(this.ticketId)
-      .subscribe((comments) => {
-        console.log(comments);
-        this.comments = comments;
-        console.log(comments);
-      });
-  }
+    .subscribe({
+      next: (comments) => {
+        this.comments = comments.map(comment => ({
+          ...comment,
+          replies: comment.replies || [] 
+        }));
+      },
+      error: (err) => {
+        console.error('Error loading comments', err);
+      }
+    });
+}
+  
 
  
   onSubmit(): void {
@@ -82,6 +90,7 @@ submitReply(commentId: number): void {
   });
 }
 handlerefresh(): void {
+  console.log("this function has been called ")
   this.loadComments();
 }
 }

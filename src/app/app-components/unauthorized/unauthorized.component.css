@@ -1,0 +1,15 @@
+.unauthorized-container {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .unauthorized-container h1 {
+    font-size: 2rem;
+    color: #ff0000;
+  }
+  
+  .unauthorized-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  

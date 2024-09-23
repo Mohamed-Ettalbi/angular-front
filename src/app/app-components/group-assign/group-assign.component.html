@@ -1,0 +1,121 @@
+<!-- 
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Select Group</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Group</mat-label>
+            <mat-select formControlName="groupControl" (selectionChange)="onGroupSelect($event.value)">
+              <mat-option *ngFor="let group of groups" [value]="group.groupId">{{ group.groupName }}</mat-option>
+            </mat-select>
+            
+            <mat-error *ngIf="firstFormGroup.controls['groupControl'].touched && firstFormGroup.controls['groupControl'].hasError('required')">
+                Selecting a group is required.
+              </mat-error>
+            
+          </mat-form-field>
+          <div class="group-info-container" *ngIf="currentGroup?.groupId">
+            <h3>Group Info :</h3>
+            <p>Chosen Group : {{ currentGroup.groupName }}</p>
+            <p>Description : {{ currentGroup.groupDescription }}</p>
+            <p>Number Of technicians in this group : {{ currentGroup.technicianDTOResponseList.length  }}</p>
+          </div>
+          <button mat-button [disabled]="firstFormGroup.invalid"  (click)="assignToGroupOnly()">Assign to Group </button>
+          <button mat-button matStepperNext [disabled]="firstFormGroup.invalid">Next to Select Technician (Optional)</button>
+        </form>
+      </mat-step>
+    <mat-step [completed]="firstFormGroup.valid" [editable]="firstFormGroup.valid">
+
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Select Technician</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Technician</mat-label>
+          <mat-select formControlName="technicianControl" (selectionChange)="onTechnicianSelect($event.value )">
+            <mat-option *ngFor="let tech of technicians" [value]="tech.email">{{ tech.firstName }} {{ tech.lastName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h4>View Technician Assinged ticket</h4>
+        <div *ngIf="ticketsLoaded" class="tickets-container">
+            <div *ngFor="let ticket of filterTicketsForTechnician(currentTechnician.email)" class="ticket-item">
+              <span class="ticket-id">Ticket ID: {{ ticket.ticketId }}</span>
+              <span class="ticket-title">Title: {{ ticket.title }}</span>
+              <span class="ticket-status">
+                Status: {{ ticket.status }}
+              </span>
+            </div>
+          </div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button  [disabled]="firstFormGroup.valid || isGroupAssigned" (click)="assignTicket()">Assign</button>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+-->
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+    <!-- First Step: Select Group -->
+    <mat-step
+      [stepControl]="firstFormGroup"
+      [hasError]="!isGroupAssigned || firstFormGroup.invalid"
+      errorMessage="Assigning to a group is required."
+    >
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Assign to Group</ng-template>
+  
+        <!-- Group Selection -->
+        <mat-form-field appearance="fill">
+          <mat-label>Group</mat-label>
+          <mat-select formControlName="groupControl" (selectionChange)="onGroupSelect($event.value)">
+            <mat-option *ngFor="let group of groups" [value]="group.groupId">{{ group.groupName }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="firstFormGroup.controls['groupControl'].touched && firstFormGroup.controls['groupControl'].hasError('required')">
+            Selecting a group is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Group Info Display -->
+        <div class="group-info-container" *ngIf="currentGroup?.groupId">
+          <h3>Group Info:</h3>
+          <p>Chosen Group: {{ currentGroup.groupName }}</p>
+          <p>Description: {{ currentGroup.groupDescription }}</p>
+          <p>Number of Technicians: {{ currentGroup.technicianDTOResponseList.length }}</p>
+        </div>
+  
+        <!-- Assign to Group Button -->
+        <button mat-button [disabled]="firstFormGroup.invalid" (click)="assignToGroupOnly()">Assign to Group</button>
+  
+        <!-- Next Button: Enabled when group is assigned -->
+        <button mat-button matStepperNext [disabled]="firstFormGroup.invalid || !isGroupAssigned">Next to Assign to Technician (Optional)</button>
+      </form>
+    </mat-step>
+  
+    <!-- Second Step: Select Technician -->
+    <mat-step [completed]="isGroupAssigned" [editable]="firstFormGroup.valid">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Assign to Technician</ng-template>
+  
+        <!-- Technician Selection -->
+        <mat-form-field appearance="fill">
+          <mat-label>Technician</mat-label>
+          <mat-select formControlName="technicianControl" (selectionChange)="onTechnicianSelect($event.value)">
+            <mat-option *ngFor="let tech of technicians" [value]="tech.email">{{ tech.firstName }} {{ tech.lastName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Technician's Assigned Tickets -->
+        <h4>View Technician Assigned Tickets</h4>
+        <div *ngIf="ticketsLoaded" class="tickets-container">
+          <div *ngFor="let ticket of filterTicketsForTechnician(currentTechnician.email)" class="ticket-item">
+            <span class="ticket-id">Ticket ID: {{ ticket.ticketId }}</span>
+            <span class="ticket-title">Title: {{ ticket.title }}</span>
+            <span class="ticket-status">Status: {{ ticket.status }}</span>
+          </div>
+        </div>
+  
+        <button mat-button matStepperPrevious>Back</button>
+        <!-- Updated Assign Button Logic -->
+        <button mat-button [disabled]="secondFormGroup.invalid  || !isGroupAssigned" (click)="assignTicket()">Assign</button>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+  
+  

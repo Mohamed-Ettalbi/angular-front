@@ -1,0 +1,14 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Select Technicians</h2>
+    
+    <mat-selection-list [(ngModel)]="selectedTechnicians" class="technician-list">
+      <mat-list-option *ngFor="let tech of technicians" [value]="tech" class="technician-item">
+        {{ tech.firstName }} {{ tech.lastName }}
+      </mat-list-option>
+    </mat-selection-list>
+    
+    <div class="dialog-buttons">
+      <button mat-button (click)="onClose()">Close</button>
+      <button mat-button (click)="onSelect()">Add Technicians</button>
+    </div>
+  </div>

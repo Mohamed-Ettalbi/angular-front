@@ -65,4 +65,13 @@ export class TicketService {
     unAssignTicket(ticketId: number): Observable<TicketDTO> {
       return this.http.post<TicketDTO>(`${this.apiUrl}/assignment/unassign/${ticketId}`,null);
     }
+
+    
+  assignTicketToGroup(ticketId: number, groupId: number): Observable<TicketDTO> {
+    return this.http.post<TicketDTO>(`${this.apiUrl}/assignment/assignToGroup/${ticketId}/${groupId}`,null);
+ 
+  }
+  assignTicketToUser(ticketId: number, userEmail: string): Observable<TicketDTO> {
+    return this.http.put<TicketDTO>(`${this.apiUrl}/assignment/assignToUser/${ticketId}/${encodeURIComponent(userEmail)}`, null);
+  }
 }

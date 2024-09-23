@@ -160,6 +160,7 @@ this.ticketService.takeTicket(ticketId,email).subscribe({
   }
   assignTicket(ticketId: number): void {
     console.log('Assigning ticket:', ticketId);
+    this.router.navigate(['/assignticket', ticketId]);
   }
 
   getTickets() {

@@ -1,24 +1,34 @@
-/* 
+
   .mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted{
-    background-color: #4CAF50; 
+    background-color: #6cb66e; 
     color: white; 
-  } */
-  .tickets-table{
-  
-  
+  }
+  .tickets-table {
+    width: 100%;
+    min-width: 600px;
+    table-layout: fixed;  
+
     width: 100%;
     tr:hover{
         background-color: #f5f5f5;
         cursor: pointer;
     }
-    table-layout: auto; 
     } 
+    mat-tab-group {
+      padding-bottom: 30px;
+    }
+    @media (max-width: 640px) {
+      .tickets-table {
+        min-width: 100%;  
+      }
     
-     /* General table styles */
-.mat-mdc-paginator-outer-container{
-    width: 100%;
-    min-width: 100%;
-}
+      th.mat-header-cell, td.mat-cell {
+        padding: 8px;  
+      }
+    }
+
+    
+    
 
         
 
@@ -35,14 +45,7 @@
       }
     
 
-    /* .mat-header-cell {
-        font-weight:bolder;
-        color: #2e0e0e;
-      }
-    
-      .mat-row:hover {
-        background-color: #BBDEFB; 
-      } */
+
     
     a {
       color: #4c94e7;
@@ -52,10 +55,37 @@
     a:hover {
       color: #0D47A1;
     }
+    th.mat-header-cell, td.mat-cell {
+      text-align: left;  
+      padding: 12px;  
+      border-bottom: 1px solid #e0e0e0;  
+    }
     
   
-    .mat-elevation-z8 {
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
+    /* .table-wrapper-div {
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      width: 100%;
+overflow-x: auto;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+
     }
+    .paginator-container{
+      width: 100%;
+    }
+    .mat-paginator {
+      width: 100%;  
+    } */
   
+    .table-wrapper-div {
+      width: 100%;
+      display: block;
+      overflow-x: auto;
+    }
+    
+    .scroll-container {
+      width: 100%;
+      overflow-x: auto;
+    }
     

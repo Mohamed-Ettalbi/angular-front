@@ -1,0 +1,25 @@
+<div class="group-dialog-container">
+    <h2 mat-dialog-title>Select a Group</h2>
+
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search groups</mat-label>
+      <input matInput placeholder="Type to filter groups" (keyup)="filterGroups($event)" aria-label="Search groups">
+    </mat-form-field>
+
+    <mat-dialog-content class="mat-typography">
+      <mat-list dense class="group-list">
+        <ng-container *ngIf="filteredGroups.length; else noGroups">
+          <mat-list-item class="list-items" *ngFor="let group of filteredGroups" (click)="selectGroup(group)">
+            {{ group.groupName }}
+          </mat-list-item>
+        </ng-container>
+        <ng-template #noGroups>
+          <p class="no-groups">No groups found.</p>
+        </ng-template>
+      </mat-list>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="dialog-actions">
+      <button mat-button mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+</div>

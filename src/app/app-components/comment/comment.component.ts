@@ -64,24 +64,36 @@ export class CommentComponent {
 
 
   }
-  deleteComment(commentId: number){
-    console.log('trying to delte comment .....');
-    console.log("signal emitted");
+  // deleteComment(commentId: number){
+  //   console.log('trying to delte comment .....');
+  //   console.log("signal emitted");
 
 
-    this.commentService.deleteComment(commentId).subscribe({
+  //   this.commentService.deleteComment(commentId).subscribe({
 
-      next: (response)=>{
-      
-          console.log('Comment deleted successfully', response);
-          this.refresh.emit();
-
-              },
-      error:(error)=> console.error("Error deleting comment with id :" , error)
-    });
+  //     next: (response)=>{
+  //       console.log("before status check ")
+  //       if (response.status === 200) {
+  //         console.log('Comment deleted successfully', response);
+  //         this.refresh.emit();
+  //       }
+  //             },
+  //     error:(error)=> console.error("Error deleting comment with id :" , error)
+  //   });
   
+  // }
+  deleteComment(commentId: number) {
+    console.log('Trying to delete comment...');
+    console.log("Signal emitted");
+  
+    this.commentService.deleteComment(commentId).subscribe({
+      next: () => {
+        console.log('Comment deleted successfully');
+        this.refresh.emit();
+      },
+      error: (error) => console.error("Error deleting comment with id:", error)
+    });
   }
-
 
 
   submitReply(): void {
@@ -99,13 +111,17 @@ export class CommentComponent {
       .subscribe((newReply: CommentInterface) => {
         if (!this.comment.replies) {
           this.comment.replies = [];  
-          
         }
+
         this.comment.replies.push(newReply);  
         this.replyContent = '';  
         this.showReplyBox = false;  
+        console.log('reply added and refresh signal sent')
         this.refresh.emit();
       });
     }
+  }
+  handlerefresh(){
+    this.refresh.emit();
   }
 }

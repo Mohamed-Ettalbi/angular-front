@@ -1,0 +1,28 @@
+<div class="add-group-container">
+    <div class="group-form-card">
+      <h2>Edit  Group</h2>
+      <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+        <!-- Group Name -->
+        <mat-form-field appearance="fill">
+          <mat-label>Group Name</mat-label>
+          <input matInput placeholder="Enter group name" formControlName="groupName" />
+          <mat-error *ngIf="groupForm.get('groupName')?.hasError('required') && groupForm.get('groupName')?.touched">
+            Group name is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Group Description</mat-label>
+          <textarea matInput placeholder="Enter group description" formControlName="groupDescription"></textarea>
+          <mat-error *ngIf="groupForm.get('groupDescription')?.hasError('required')&& groupForm.get('groupDescription')?.touched">
+            Group description is required
+          </mat-error>
+        </mat-form-field>
+
+
+  
+        <button mat-raised-button [disabled]="groupForm.invalid" type="submit">Edit Group</button>
+      </form>
+    </div>
+  </div>
+  

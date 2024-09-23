@@ -38,7 +38,6 @@
      <div class="form-group">
        <textarea id="comment" formControlName="comment" placeholder="Write your comment..."></textarea>
        <div *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched" class="error">
-         <small *ngIf="commentForm.get('comment')?.errors?.['required']">Comment is required.</small>
          <small *ngIf="commentForm.get('comment')?.errors?.['minlength']">Comment must be at least 2 characters.</small>
          <small *ngIf="commentForm.get('comment')?.errors?.['maxlength']">Comment cannot exceed 500 characters.</small>
        </div>
@@ -52,7 +51,7 @@
      There was an error submitting your comment. Please try again.
    </div>
    <div *ngFor="let comment of comments">
-    <app-comment [comment]="comment" (refresh)="handlerefresh()"   ></app-comment>
+    <app-comment [comment]="comment" (refresh)="handlerefresh()"></app-comment>
   </div>
   
     <!--
